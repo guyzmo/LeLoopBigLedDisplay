@@ -1,0 +1,17 @@
+Code is work in progress
+
+arduino sketch is ok, once uploaded to arduino, write text on serial port, it will be displayed
+on the display. escape followed by a number will do a control character :
+    ^[0 : switch to/from binary mode (everything is "on" ; space or 0 is "off")
+    ^[1 : push an on pixel
+    ^[2 : push an off pixel
+    ^[3 : clear the screen
+    ^[4 : put the screen to all on
+    ^[5 : write a sample text
+    ^[6 : print the display buffer
+
+N.B. in binary mode the display buffer is not used.
+
+python upload bitmap code is still work in progress (need to work out the matrix transformation
+so it is correctly displayed).
+
