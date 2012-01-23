@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-# Simple CLI arduino serial debug read/write
-# (c)2010, Guyzmo <guyzmo{at}hackable-devices.org>
+#this code is WTFPL, please reuse it, improve it and share it as much as you like and pay me a beer !
+#(c)2011 guyzmo at leloop dot org
 
 import sys, serial, fcntl, os
 

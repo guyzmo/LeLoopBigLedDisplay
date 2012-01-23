@@ -1,4 +1,6 @@
 /*
+this code is WTFPL, please reuse it, improve it and share it as much as you like and pay me a beer !
+(c)2011 guyzmo at leloop dot org
                             _
 pixel is changing at each _/
 
