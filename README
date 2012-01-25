@@ -1,4 +1,7 @@
 Code is work in progress
+========================
+
+LED Display reference : " CI5TD Centaure Brinon "
 
 arduino sketch is ok, once uploaded to arduino, write text on serial port, it will be displayed
 on the display. escape followed by a number will do a control character :
