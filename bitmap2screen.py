@@ -2,10 +2,9 @@
 #this code is WTFPL, please reuse it, improve it and share it as much as you like and pay me a beer !
 #(c)2011 guyzmo at leloop dot org
 #
-# NOT TESTED ON THE WILD !!!
+# /!\ Still not tested on the wild /!\
 
 import sys, serial, fcntl, os
-
 
 def send_to_serial(serial, baudrate, infile):
     fd = sys.stdin.fileno()
@@ -50,14 +49,9 @@ def matrix_adapt(file):
         dotmat.reverse()
         return dotmat
 
-def write_to_screen(serial,pixels):
-    for pix in matrix_adapt(sys.argv[1]):
-        print pix,
-
-
 if __name__ == '__main__':
     if len(sys.argv) != 4:
         print "Usage: bitmap2screen /dev/ttyUSB0 9600 file.bitmap"
         exit(1)
 
-    init_serial(sys.argv[1],sys.argv[2],sys.argv[3])
+    send_to_serial(sys.argv[1],sys.argv[2],sys.argv[3])
