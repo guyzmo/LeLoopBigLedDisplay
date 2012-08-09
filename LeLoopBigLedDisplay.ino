@@ -20,10 +20,35 @@ CD74HC4094E
 #define NB_LINES 8
 #define NB_COLS 96
 
-#define NCP 13   // 5. 2Z  / Clock
-#define CP 12    // 6. 2Y / 
-#define NDATA 11 // 3. 1Z  / Data
-#define DATA 10  // 2. 1Y /
+#define NCP   11 // 5. 2Z  / Clock
+#define CP    10 // 6. 2Y / 
+#define NDATA 13 // 3. 1Z  / Data
+#define DATA  12 // 2. 1Y /
+
+//#define NCP   10 // 5. 2Z  / Clock
+//#define CP    11 // 6. 2Y / 
+//#define NDATA 12 // 3. 1Z  / Data
+//#define DATA  13 // 2. 1Y /
+
+//#define NCP   13 // 5. 2Z  / Clock
+//#define CP    12 // 6. 2Y / 
+//#define NDATA 11 // 3. 1Z  / Data
+//#define DATA  10 // 2. 1Y /
+
+//#define NCP   13 // 5. 2Z  / Clock
+//#define CP    12 // 6. 2Y / 
+//#define NDATA 10 // 3. 1Z  / Data
+//#define DATA  11 // 2. 1Y /
+
+//#define NCP   12 // 5. 2Z  / Clock
+//#define CP    13 // 6. 2Y / 
+//#define NDATA 11 // 3. 1Z  / Data
+//#define DATA  10 // 2. 1Y /
+
+//#define NCP   12 // 5. 2Z  / Clock
+//#define CP    13 // 6. 2Y / 
+//#define NDATA 10 // 3. 1Z  / Data
+//#define DATA  11 // 2. 1Y /
 
 #define DATA_DEFAULT HIGH
 #define CP_DEFAULT   HIGH
@@ -165,18 +190,18 @@ class DotMatrixDisplay {
         void setOn() {
             //Serial.println("dotmatrix.set_on");
             //Serial.print(1);
-            digitalWrite(NDATA, LOW);
+            digitalWrite(NDATA, HIGH);
         }
 
         void setOff() {
             //Serial.println("dotmatrix.set_off");
             //Serial.print(0);
-            digitalWrite(NDATA, HIGH);
+            digitalWrite(NDATA, LOW);
         }
 
         void clear() {
             //Serial.println("dotmatrix.clear");
-            digitalWrite(NDATA, HIGH);
+            digitalWrite(NDATA, LOW);
             for (int i=0;i<NB_COLS*NB_LINES*NB_DISP;++i) {
                 step();
             }
@@ -184,7 +209,7 @@ class DotMatrixDisplay {
 
         void allOn() {
             //Serial.println("dotmatrix.all_on");
-            digitalWrite(NDATA, LOW);
+            digitalWrite(NDATA, HIGH);
             for (int i=0;i<NB_COLS*NB_LINES*NB_DISP;++i) {
                 step();
             }
@@ -358,8 +383,9 @@ class SerialListener {
             }
         }
 
-        void getChar() {
-            while (! Serial.available());
+        boolean getChar() {
+            if (! Serial.available())
+                return false;
             char c = Serial.read();
             if (c == 27) {
                 while (! Serial.available());
@@ -382,7 +408,7 @@ class SerialListener {
                 bufdotmat.store_text(textBuffer,0,0);
                 bufdotmat.update();
             }
-                
+            return true;
         }
 
 } serial;
@@ -394,8 +420,12 @@ void setup() {
     //Serial.println("setup");
     bufdotmat.clear();
     dotmatrix.setup();
+    delay(1000);
+    bufdotmat.store_text("\nHe who makes a\nbeast of himselfgets rid of the pain of being a\nman.\n\nDr Johnson", 0, 0);
+    bufdotmat.update();
 }
 
+//bool started=LOW;
 void loop() {
     serial.getChar();
 }
